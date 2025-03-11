@@ -1,0 +1,109 @@
+﻿{
+  "enabled": true,
+  "executionTime": 10000,
+  "epoch": 2000,
+  "delayBetweenRequests": 0,
+  "delayBetweenRuns": 10000,
+  "concurrencyLevel": 6,
+  "connectionString": "Data Source=file.db",
+  "numCustomers": 1000,
+  "numProdPerSeller": 10,
+    "transactionDistribution": {
+        "PRICE_UPDATE": 99,
+        "UPDATE_PRODUCT": 100
+    },
+  "ingestionConfig": {
+    "strategy": "WORKER_PER_CPU",
+    "concurrencyLevel": 6,
+    "mapTableToUrl": {
+      "stock_items": "http://localhost:5003",
+      "products": "http://localhost:5008"
+    }
+  },
+  "runs": [
+    {
+      "numProducts": 1000,
+      "sellerDistribution": "UNIFORM",
+      "keyDistribution": "UNIFORM"
+    }
+  ],
+  "postRunTasks": [
+    {
+      "name": "cart",
+      "url": "http://localhost:5001/reset"
+    },
+    {
+      "name": "stock",
+      "url": "http://localhost:5003/reset"
+    },
+    {
+      "name": "product",
+      "url": "http://localhost:5008/reset"
+    }
+  ],
+  "postExperimentTasks": [
+    {
+      "name": "cart",
+      "url": "http://localhost:5001/cleanup"
+    },
+    {
+      "name": "stock",
+      "url": "http://localhost:5003/cleanup"
+    },
+    {
+      "name": "product",
+      "url": "http://localhost:5008/cleanup"
+    }
+  ],
+  "streamingConfig": {
+    "type": "REDIS",
+    "host": "localhost",
+    "port": 6379,
+    "streams": [
+      "DeliveryNotification",
+      "InvoiceIssued",
+      "PaymentConfirmed",
+      "PaymentFailed",
+      "Product",
+      "ProductUpdated",
+      "PriceUpdated",
+      "ReserveStock",
+      "ShipmentNotification",
+      "StockConfirmed",
+      "ReserveStockFailed"
+    ]
+  },
+  "customerWorkerConfig": {
+    "maxNumberKeysToBrowse": 10,
+    "maxNumberKeysToAddToCart": 10,
+    "minMaxQtyRange": {
+      "min": 1,
+      "max": 10
+    },
+    "delayBetweenRequestsRange": {
+      "min": 1,
+      "max": 1000
+    },
+    "checkoutProbability": 100,
+    "voucherProbability": 5,
+    "productUrl": "http://localhost:5008",
+    "cartUrl": "http://localhost:5001",
+    "interactive": false
+  },
+  "sellerWorkerConfig": {
+    "interactive": false,
+    "delayBetweenRequestsRange": {
+      "min": 1,
+      "max": 1000
+    },
+    "adjustRange": {
+      "min": 1,
+      "max": 10
+    },
+    "sellerUrl": "http://localhost:5006",
+    "productUrl": "http://localhost:5008"
+  },
+  "deliveryWorkerConfig": {
+    "shipmentUrl": "http://localhost:5005"
+  }
+}

@@ -209,9 +209,17 @@ namespace Common.DataGeneration
 
         protected static string RemoveBadCharacter(string str)
         {
-            if (str.Contains('\''))
-            {
-                return str.Replace("'", "");
+            if (str.Contains("'")) {
+                str = str.Replace("'", "");
+            }
+            if (str.Contains("%")) {
+                str = str.Replace("%", "");
+            }
+            if (str.Contains("é")) {
+                str = str.Replace("é", "e");
+            }
+            if (str.Contains("&")) {
+                str = str.Replace("&", "and");
             }
             return str;
         }
