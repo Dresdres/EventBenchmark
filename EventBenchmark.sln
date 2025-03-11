@@ -27,6 +27,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modb", "Modb\Modb.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Postgres", "Postgres\Postgres.csproj", "{5FA30CC3-15F3-464B-BA98-DF0C30C8A3F9}"
 EndProject
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +71,9 @@ Global
 		{5FA30CC3-15F3-464B-BA98-DF0C30C8A3F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FA30CC3-15F3-464B-BA98-DF0C30C8A3F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FA30CC3-15F3-464B-BA98-DF0C30C8A3F9}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
